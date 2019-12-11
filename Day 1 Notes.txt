@@ -1,0 +1,26 @@
+Bitwise Operators
+                                               
+~ Complement         Example:  
+& and                00001101   
+| or                 11110010  
+                     +      1
+                     11110011
+
+^ XOR               >When they are the same, it is off (0 ^ 0) and when one is on and other is off, it is on (0 ^ 1)
+<< Left Shift       Example: 1010 << 2 = 101000 40
+>> Right Shift
+
+"ABC".encode("base64") <-- .encode()
+"ABCD\x00".encode("base64") <-- more padding of zeros
+
+c = "ABC".encode("Base64")
+print c
+Will give you "QUJD"
+
+c.decode("base64")
+Will give you "ABC"
+
+XOR Practice-      <-- Look up single byte as well
+A - 01000001                ABC - A | B | C     <--Multi-byte
+B - 01000010                BC - B | C | B
+XOR - 00000011
