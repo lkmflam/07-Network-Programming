@@ -9,6 +9,7 @@ capabilities. Answer the following questions, based on your Wireshark experiment
 1.List 3 different protocolsthat appear in the protocol column in the unfiltered packet-listing 
 window in step 7 above.
 
+DNS, HTTP, TCP, ICMPv6, etc.
 
 2.How long did it take from when the HTTP GET message was sent until the HTTP OK reply was 
 received? (By default, the value of the Time column in the packet-listing window is the 
@@ -16,14 +17,20 @@ amount of time, in seconds, since Wireshark tracing began.  To display the Time 
 time-of-day format, select the Wireshark Viewpull down menu, then select Time Display Format,
 then select Time-of-day.)
 
+About .1 seconds.
 
 3.What is the Internet address of the gaia.cs.umass.edu (also known as www-net.cs.umass.edu)?
 What is the Internet address of your computer?
 
+Their address is 23.63.253.176
+Mine is 10.128.102.210
 
 4.Print the two HTTP messages (GET and OK) referred to in question 2 above. 
 To do so, select Printfrom the Wireshark Filecommand menu, and select 
 the“Selected Packet Only”and “Print as displayed”radial buttons, and then click OK.
+
+Included in Wireshark Lab Question 4 on Kali
+
 ```
 1.Start up your favorite web browser, which will display your selected homepage.
 
