@@ -22,7 +22,7 @@ This is the output.
 ## QOTD example
 UDP is a communication protocol that transmits independent packets over the network with no guarantee of arrival and no guarantee of the order of delivery. One service that used UDP is the Quote of the Day (QOTD).
 
-### File qotd_client.py
+### File: qotd_clt.py
 ```python
 #!/usr/bin/env python
 
