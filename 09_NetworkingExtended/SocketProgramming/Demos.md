@@ -1,4 +1,5 @@
-#TCP/IP client-server communication
+# TCP/IP client-server communication
+
 As we have established, sockets can either be configured to act as a server or client, 
 to achieve bi-directional communication over TCP using the SOCK_STREAM family. In this example, 
 we shall implement a simple echo application that receives all incoming data and sends them back to the sender. 
