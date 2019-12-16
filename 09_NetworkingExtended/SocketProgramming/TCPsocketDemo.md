@@ -105,7 +105,8 @@ waiting for a connection
 ```
 And the client;
 ```
-$ python3 echo_client.py                                                                                             connecting to localhost port 10000
+$ python3 echo_client.py                                                                                             
+connecting to localhost port 10000
 sending b'This is our message. It is very long but will only be transmitted in chunks of 16 at a time'
 received b'This is our mess'
 received b'age. It is very '
