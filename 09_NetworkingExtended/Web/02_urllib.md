@@ -24,7 +24,7 @@ urllib.request.urlopen (url, data = None, [timeout,] *, cafile = None, capath = 
 Retrieving the contents of a URL is a straightforward process when done using urllib. You can open the Python interpreter and execute the following instructions:
 ```python
 >>> from urllib.request import urlopen
->>> response = urlopen('http://www.packtpub.com')
+>>> response = urlopen('http://www.example.com')
 >>> response
 <http.client.HTTPResponse object at 0x7fa3c53059b0>
 >>> response.readline()
@@ -33,7 +33,7 @@ We use the urllib.request.urlopen() function to send a request and receive a res
 
 This function also supports specifying a timeout for the request that represents the waiting time in the request; that is, if the page takes more than what we indicated, it will result in an error:
 ```python
->>> print(urllib.request.urlopen(“http://packtpub.com”,timeout=30))
+>>> print(urllib.request.urlopen(“http://example.com”,timeout=30))
 ```
 We can see from the preceding example that urlopen() returns an http.client.HTTPResponse instance. The response object gives us access to the data of the requested resource and the properties and the metadata of the response:
 ```
