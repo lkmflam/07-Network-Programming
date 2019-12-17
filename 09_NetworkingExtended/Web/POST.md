@@ -1,10 +1,10 @@
-POST
+# POST
 These are known as secure requests that are made to a source. The requested resource state can be altered. Data that's posted or sent to the requested URL is not visible in the URL; instead, it's transferred to the request body. A request that's made using POST isn't cached or bookmarked and has no restrictions in terms of length.
 
 In the following example, a simple HTTP request and response service (source: http://httpbin.org/) has been used to make a POST request.
 
 pageUrl accepts data to be posted, as defined in params to postUrl. Custom headers are assigned as headers. The post() function from the requests library accepts URLs, data, and headers, and returns a response in JSON format:
-
+```python
 import requests
 pageUrl="http://httpbin.org/forms/post"
 postUrl="http://httpbin.org/post"
@@ -19,8 +19,9 @@ headers={ 'Accept':'text/html,application/xhtml+xml,application/xml;q=0.9,image/
 #making POST request to postUrl with params and request headers, response will be read as JSON
 response = requests.post(postUrl,data=params,headers=headers).json()
 print(response)
+```
 The previous code will result in the following output:
-
+```
 {
 'args': {}, 
 'data': '', 
@@ -45,4 +46,11 @@ The previous code will result in the following output:
 'json': None, 'origin': '202.51.76.90', 
 'url': 'http://httpbin.org/post'
 }
+```
 For the POST request we attempted, we can find detailed information regarding Request Headers, Response Headers, HTTP Status, and POST data (params) using the DevTools Network panel, as shown in the following screenshot:
+
+![image](https://user-images.githubusercontent.com/47218880/71026104-1a035800-20ce-11ea-82fd-4fb8eceb3906.png)
+
+POST data submitted and found as form data in the DevTools Network panelIt's always beneficial to learn and detect the request and response sequences that are made with URLs through the browser and the available DevTools.
+
+
