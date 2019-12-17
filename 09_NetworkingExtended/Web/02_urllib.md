@@ -93,7 +93,7 @@ A request to the server consists of a request line that contains some basic info
 
 HTTP requests consist of two main parts: a header and a body. Headers are the lines of information that contain specific metadata about the response and tell the client how to interpret it. With this module, we can check whether the headers can provide information about the web server.
 
-The HTTP headers are Name: value pairs; for example, Host: www.packtpub.com. These headers contain different information about the HTTP request and about the browser. For example, the User-Agent line provides information about the browser and operating system of the machine from which the request is made, and Accept Encoding informs the server if the browser can accept compressed data under formats such as gzip.
+The HTTP headers are Name: value pairs; for example, Host: www.example.com. These headers contain different information about the HTTP request and about the browser. For example, the User-Agent line provides information about the browser and operating system of the machine from which the request is made, and Accept Encoding informs the server if the browser can accept compressed data under formats such as gzip.
 
 An important header is the host header. Many web server applications provide the ability to host more than one website on the same server using the same IP address. DNS aliases are set up for the various website domain names, so they all point to the same IP address. Effectively, the web server is given multiple hostnames, one for each website it hosts.
 
