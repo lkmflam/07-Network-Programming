@@ -43,3 +43,14 @@ Check the ongoing and returned headers:
 >>> response.headers
 {'Date': 'Fri, 25 May 2018 21:51:47 GMT', 'Server': 'Apache', 'Last-Modified': 'Thu, 22 Apr 2004 15:52:25 GMT', 'Accept-Ranges': 'bytes', 'Var
 ```
+# What's going on:
+The operation of requests is very simple; perform the operation, GET in this case, over the URL. This returns a result object that can be analyzed. The main elements are the status_code and the body content, which can be presented as text.
+
+The full request can be checked in the request field:
+```
+>>> response.request
+<PreparedRequest [GET]>
+>>> response.request.url
+'http://www.columbia.edu/~fdc/sample.html'
+```
+The full request's documentation can be found here: http://docs.python-requests.org/en/master/. 
