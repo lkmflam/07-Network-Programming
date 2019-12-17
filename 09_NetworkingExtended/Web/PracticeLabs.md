@@ -10,3 +10,9 @@
    using this information-> Source: https://analytics.usa.gov/data/live/realtime.json
    
 5. Create a Python Script to a list of all the h1, h2, h3 tags from the site page python.org.
+
+6. Use urllib to retrieve http://data.pr4e.org/romeo.txt
+   and display up to 3000 characters, and  counting
+   the overall characters in the document. Don't worry about the headers for this
+   exercise, simply show the first 3000 characters of the document contents.
+
