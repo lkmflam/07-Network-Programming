@@ -87,3 +87,35 @@ reason Not Found
 url https://www.ietf.org/rfc/rfc0.txt
 ```
 In the previous script, we've requested an rfc0.txt document, which doesn't exist. So the server has returned a 404 status code, and urllib has captured this and raised an HTTPError. You can see that HTTPError provides useful attributes regarding the request. In the preceding example, we obtain the status, reason, and url attributes to get some information about the response.
+
+## HTTP headers
+A request to the server consists of a request line that contains some basic information about the request, and various lines that constitute the headers.
+
+HTTP requests consist of two main parts: a header and a body. Headers are the lines of information that contain specific metadata about the response and tell the client how to interpret it. With this module, we can check whether the headers can provide information about the web server.
+
+The HTTP headers are Name: value pairs; for example, Host: www.packtpub.com. These headers contain different information about the HTTP request and about the browser. For example, the User-Agent line provides information about the browser and operating system of the machine from which the request is made, and Accept Encoding informs the server if the browser can accept compressed data under formats such as gzip.
+
+An important header is the host header. Many web server applications provide the ability to host more than one website on the same server using the same IP address. DNS aliases are set up for the various website domain names, so they all point to the same IP address. Effectively, the web server is given multiple hostnames, one for each website it hosts.
+
+The following script will obtain the site headers through the response object's headers. For this task, we can use the headers property or the getheaders() method. The getheaders() method returns the headers as a list of tuples of the form (header name, header value).
+
+You can find the following code in the get_headers.py file: 
+```python
+#!/usr/bin/env python3
+import urllib.request
+url = input("Enter the URL:")
+http_response = urllib.request.urlopen(url)
+if http_response.code == 200:
+    print(http_response.headers)
+    for key,value in http_response.getheaders():
+        print(key,value)
+```
+Output:
+```
+Enter the URL:http://www.example.com
+Server: nginx/1.4.5
+Date: Mon, 26 Nov 2019 11:04:05 GMT
+Content-Type: text/html; charset=utf-8
+Transfer-Encoding: chunked
+Connection: close
+```
