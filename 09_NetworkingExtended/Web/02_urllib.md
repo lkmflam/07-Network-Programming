@@ -46,7 +46,7 @@ If we get a response in JSON format, we can use the following Python json module
 >>> json_response = json.loads(response.read())
 ```
 In the variable response, we save the file that launches the request, and we use the read() function to read the content. Then we transform it into JSON format.
-Status codes
+## Status codes
 HTTP responses provide us with a way to check the status of the response through status codes. We can read the status code of a response using its status property. The value of 200 is an HTTP status code that tells us that the request is OK:
 ```
 >>> response.status
@@ -63,3 +63,27 @@ The 200 code informs us that everything went fine. There are a number of codes, 
 Status codes help us to see whether our response was successful or not. Any code in the 200 range indicates a success, whereas any code in either the 400 range or the 500 range indicates failure in the server.
 
 The official list of status codes is maintained by IANA and can be found at https://www.iana.org/assignments/http-status-codes.
+
+## Handling exceptions
+Status codes should always be checked so that our program can respond appropriately if something goes wrong. The urllib package helps us in checking the status codes by raising an exception if it encounters a problem.
+
+Let's go through how to catch these and handle them usefully. We'll try this following command block. You can find the following code in the urllib_exceptions.py file:
+```python
+import urllib.error
+from urllib.request import urlopen
+try:
+   urlopen('http://www.ietf.org/rfc/rfc0.txt')
+except urllib.error.HTTPError as e:
+    print('Exception', e)
+    print('status', e.code)
+    print('reason', e.reason)
+    print('url', e.url)
+```
+The output of the previous script is:
+```
+Exception HTTP Error 404: Not Found
+status 404
+reason Not Found
+url https://www.ietf.org/rfc/rfc0.txt
+```
+In the previous script, we've requested an rfc0.txt document, which doesn't exist. So the server has returned a 404 status code, and urllib has captured this and raised an HTTPError. You can see that HTTPError provides useful attributes regarding the request. In the preceding example, we obtain the status, reason, and url attributes to get some information about the response.
