@@ -29,7 +29,7 @@ Retrieving the contents of a URL is a straightforward process when done using ur
 <http.client.HTTPResponse object at 0x7fa3c53059b0>
 >>> response.readline()
 ```
-We use the urllib.request.urlopen() function to send a request and receive a response for the resource at http://www.packtpub.com, in this case an HTML page. We will then print out the first line of the HTML we receive, with the readline() method from the response object.
+We use the urllib.request.urlopen() function to send a request and receive a response for the resource at http://www.example.com, in this case an HTML page. We will then print out the first line of the HTML we receive, with the readline() method from the response object.
 
 This function also supports specifying a timeout for the request that represents the waiting time in the request; that is, if the page takes more than what we indicated, it will result in an error:
 ```python
