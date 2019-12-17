@@ -46,3 +46,20 @@ If we get a response in JSON format, we can use the following Python json module
 >>> json_response = json.loads(response.read())
 ```
 In the variable response, we save the file that launches the request, and we use the read() function to read the content. Then we transform it into JSON format.
+Status codes
+HTTP responses provide us with a way to check the status of the response through status codes. We can read the status code of a response using its status property. The value of 200 is an HTTP status code that tells us that the request is OK:
+```
+>>> response.status
+200
+```
+The 200 code informs us that everything went fine. There are a number of codes, and each one conveys a different meaning. According to their first digit, status codes are classified into the following groups:
+```
+100: Informational
+200: Success
+300: Redirection
+400: Client error
+500: Server error
+```
+Status codes help us to see whether our response was successful or not. Any code in the 200 range indicates a success, whereas any code in either the 400 range or the 500 range indicates failure in the server.
+
+The official list of status codes is maintained by IANA and can be found at https://www.iana.org/assignments/http-status-codes.
