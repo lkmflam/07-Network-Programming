@@ -1,0 +1,230 @@
+root@osboxes:~/Documents# python3
+Python 3.7.4 (default, Jul 11 2019, 10:43:21) 
+[GCC 8.3.0] on linux
+Type "help", "copyright", "credits" or "license" for more information.
+
+>>> import requests
+
+>>> link = "http://python-requests.org"
+
+>>> r = requests.get(link)
+
+>>> dir(r)
+['__attrs__', '__bool__', '__class__', '__delattr__', '__dict__', '__dir__', '__doc__', '__enter__', '__eq__', '__exit__', '__format__', '__ge__', '__getattribute__', '__getstate__', '__gt__', '__hash__', '__init__', '__init_subclass__', '__iter__', '__le__', '__lt__', '__module__', '__ne__', '__new__', '__nonzero__', '__reduce__', '__reduce_ex__', '__repr__', '__setattr__', '__setstate__', '__sizeof__', '__str__', '__subclasshook__', '__weakref__', '_content', '_content_consumed', '_next', 'apparent_encoding', 'close', 'connection', 'content', 'cookies', 'elapsed', 'encoding', 'headers', 'history', 'is_permanent_redirect', 'is_redirect', 'iter_content', 'iter_lines', 'json', 'links', 'next', 'ok', 'raise_for_status', 'raw', 'reason', 'request', 'status_code', 'text', 'url']
+
+>>> print(type(r))
+<class 'requests.models.Response'>
+
+>>> r.url #URL of wthe response object
+'https://2.python-requests.org/en/master/'
+
+>>> r.status_code #Status code
+200
+
+>>> r.history #Status code of history event
+[<Response [301]>, <Response [302]>]
+
+>>> r.headers #Response headers with information about server date, etc.
+{'Date': 'Wed, 18 Dec 2019 14:44:34 GMT', 'Content-Type': 'text/html', 'Transfer-Encoding': 'chunked', 'Connection': 'keep-alive', 'Last-Modified': 'Sat, 23 Nov 2019 02:51:33 GMT', 'Vary': 'Accept-Encoding', 'X-Cname-TryFiles': 'True', 'X-Served': 'Nginx', 'X-Deity': 'web03', 'CF-Cache-Status': 'DYNAMIC', 'Expect-CT': 'max-age=604800, report-uri="https://report-uri.cloudflare.com/cdn-cgi/beacon/expect-ct"', 'Server': 'cloudflare', 'CF-RAY': '5471ea5f9ac8ec56-DFW', 'Content-Encoding': 'gzip'}
+
+>>> r.headers["Content-Type"] #Specific header information grab as the bracket contains category
+'text/html'
+
+>>> r.request.headers #request headers
+{'User-Agent': 'python-requests/2.21.0', 'Accept-Encoding': 'gzip, deflate', 'Accept': '*/*', 'Connection': 'keep-alive', 'Cookie': '__cfduid=d05afbd0077ba0db29a96682231d6a79a1576680273'}
+
+>>> r.encoding #response encoding
+'ISO-8859-1'
+
+>>> r.content[0-400] #400 bytes of characters
+101
+
+>>> r.content[0:400] #400 bytes of characters
+b'\n<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"\n  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">\n\n<html xmlns="http://www.w3.org/1999/xhtml" lang="en">\n  <head>\n    <meta http-equiv="X-UA-Compatible" content="IE=Edge" />\n    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />\n    <title>Requests: HTTP for Humans\xe2\x84\xa2 &#8212; Requests 2.22.0 documentation'
+
+>>> r.text[0:400] #Sub string that is 400 string from the response
+'\n<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"\n  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">\n\n<html xmlns="http://www.w3.org/1999/xhtml" lang="en">\n  <head>\n    <meta http-equiv="X-UA-Compatible" content="IE=Edge" />\n    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />\n    <title>Requests: HTTP for Humansâ\x84¢ &#8212; Requests 2.22.0 documentation'
+
+>>> r = requests.get(link, stream=TRUE) #raw response
+Traceback (most recent call last):
+  File "<stdin>", line 1, in <module>
+NameError: name 'TRUE' is not defined
+
+>>> print(type(r.raw)) #type of response obtained
+<class 'urllib3.response.HTTPResponse'>
+
+>>> r.raw.read(100) #Read the first 100 characters from a raw response
+b''
+
+>>> link = "https://citibikenyc.com/stations/stations.json"
+
+>>> response = requests.get(link).json() 
+Traceback (most recent call last):
+  File "<stdin>", line 1, in <module>
+  File "/usr/lib/python3/dist-packages/requests/models.py", line 897, in json
+    return complexjson.loads(self.text, **kwargs)
+  File "/usr/lib/python3/dist-packages/simplejson/__init__.py", line 518, in loads
+    return _default_decoder.decode(s)
+  File "/usr/lib/python3/dist-packages/simplejson/decoder.py", line 370, in decode
+    obj, end = self.raw_decode(s)
+  File "/usr/lib/python3/dist-packages/simplejson/decoder.py", line 400, in raw_decode
+    return self.scan_once(s, idx=_w(s, idx).end())
+simplejson.errors.JSONDecodeError: Expecting value: line 1 column 1 (char 0)
+
+>>> link = "https://citibikenyc.com/stations/stations.json"
+
+>>> link = "https://feeds.citibikenyc.com/stations/stations.json"
+
+>>> response = requests.get(link).json() 
+
+>>> for i in range(10): #Read the 10 stationName from the json response
+...     print("Station: ", response["stationBeanList"][i]["stationName"])
+...     print("Station: " , response["stationBeanList"][i]["stationName"])
+... 
+Station:  Grand Army Plaza & Central Park S
+Station:  Grand Army Plaza & Central Park S
+Station:  E 47 St & Park Ave
+Station:  E 47 St & Park Ave
+Station:  E 53 St & Lexington Ave
+Station:  E 53 St & Lexington Ave
+Station:  6 Ave & Canal St
+Station:  6 Ave & Canal St
+Station:  Broadway & E 22 St
+Station:  Broadway & E 22 St
+Station:  Water - Whitehall Plaza
+Station:  Water - Whitehall Plaza
+Station:  W 52 St & 6 Ave
+Station:  W 52 St & 6 Ave
+Station:  W 52 St & 11 Ave
+Station:  W 52 St & 11 Ave
+Station:  Franklin St & W Broadway
+Station:  Franklin St & W Broadway
+Station:  St James Pl & Pearl St
+Station:  St James Pl & Pearl St
+
+>>> r = requests.get("https://api.github.com/user", auth=("lkmflam", "Flamingo19!")) 
+
+
+
+
+
+
+
+>>> import urllib.request
+>>> dir(urllib.request) #Listing the features available
+['AbstractBasicAuthHandler', 'AbstractDigestAuthHandler', 'AbstractHTTPHandler', 'BaseHandler', 'CacheFTPHandler', 'ContentTooShortError', 'DataHandler', 'FTPHandler', 'FancyURLopener', 'FileHandler', 'HTTPBasicAuthHandler', 'HTTPCookieProcessor', 'HTTPDefaultErrorHandler', 'HTTPDigestAuthHandler', 'HTTPError', 'HTTPErrorProcessor', 'HTTPHandler', 'HTTPPasswordMgr', 'HTTPPasswordMgrWithDefaultRealm', 'HTTPPasswordMgrWithPriorAuth', 'HTTPRedirectHandler', 'HTTPSHandler', 'MAXFTPCACHE', 'OpenerDirector', 'ProxyBasicAuthHandler', 'ProxyDigestAuthHandler', 'ProxyHandler', 'Request', 'URLError', 'URLopener', 'UnknownHandler', '__all__', '__builtins__', '__cached__', '__doc__', '__file__', '__loader__', '__name__', '__package__', '__spec__', '__version__', '_cut_port_re', '_ftperrors', '_have_ssl', '_localhost', '_noheaders', '_opener', '_parse_proxy', '_proxy_bypass_macosx_sysconf', '_randombytes', '_safe_gethostbyname', '_thishost', '_url_tempfiles', 'addclosehook', 'addinfourl', 'base64', 'bisect', 'build_opener', 'contextlib', 'email', 'ftpcache', 'ftperrors', 'ftpwrapper', 'getproxies', 'getproxies_environment', 'hashlib', 'http', 'install_opener', 'io', 'localhost', 'noheaders', 'os', 'parse_http_list', 'parse_keqv_list', 'pathname2url', 'posixpath', 'proxy_bypass', 'proxy_bypass_environment', 'quote', 're', 'request_host', 'socket', 'splitattr', 'splithost', 'splitpasswd', 'splitport', 'splitquery', 'splittag', 'splittype', 'splituser', 'splitvalue', 'ssl', 'string', 'sys', 'tempfile', 'thishost', 'time', 'to_bytes', 'unquote', 'unquote_to_bytes', 'unwrap', 'url2pathname', 'urlcleanup', 'urljoin', 'urlopen', 'urlparse', 'urlretrieve', 'urlsplit', 'urlunparse', 'warnings']
+
+>>> link ="https://www.google.com"
+
+>>> linkRequest =urllib.request.urlopen(link) #Open the link and assign to linkRequest
+
+>>> print(type(linkRequest)) #object type
+<class 'http.client.HTTPResponse'>
+
+>>> linkResponse = urllib.request.urlopen(link).read() #Open link and read content
+
+>>> print(type(linkResponse))
+<class 'bytes'>
+
+>>> linkRequest.getcode() #can also use it as linkRequest.code or linkRequest.status
+200
+
+>>> linkRequest.code
+200
+
+>>> linkRequest.geturl()
+'https://www.google.com'
+
+>>> linkRequest._method
+'GET'
+
+>>> linkRequest.getheaders
+<bound method HTTPResponse.getheaders of <http.client.HTTPResponse object at 0x7fdb08124b90>>
+
+>>> linkRequest.getheaders()
+[('Date', 'Wed, 18 Dec 2019 16:14:09 GMT'), ('Expires', '-1'), ('Cache-Control', 'private, max-age=0'), ('Content-Type', 'text/html; charset=ISO-8859-1'), ('P3P', 'CP="This is not a P3P policy! See g.co/p3phelp for more info."'), ('Server', 'gws'), ('X-XSS-Protection', '0'), ('X-Frame-Options', 'SAMEORIGIN'), ('Set-Cookie', '1P_JAR=2019-12-18-16; expires=Fri, 17-Jan-2020 16:14:09 GMT; path=/; domain=.google.com'), ('Set-Cookie', 'NID=193=HyV6mlX0ZO-HkTzE1IiQTUVCy8_ib7dahz7ETNoLLwwLw7OkXHBC8ZdfcHK-Nt_w1kOwVT0eMjuueW6QSHiNyBaxAUTKDaO74npZrYL_bWA8C0VsTBoL_CLmaiGsWzEWeFWLTQuqgKeeo3F6N3Nu2wHTZ0kZRPWimdleyvuFmXY; expires=Thu, 18-Jun-2020 16:14:09 GMT; path=/; domain=.google.com; HttpOnly'), ('Alt-Svc', 'quic=":443"; ma=2592000; v="46,43",h3-Q050=":443"; ma=2592000,h3-Q049=":443"; ma=2592000,h3-Q048=":443"; ma=2592000,h3-Q046=":443"; ma=2592000,h3-Q043=":443"; ma=2592000'), ('Accept-Ranges', 'none'), ('Vary', 'Accept-Encoding'), ('Connection', 'close')]
+
+>>> linkRequest.getheader("Content-Type")
+'text/html; charset=ISO-8859-1'
+
+>>> linkRequest.info()["Content-Type"]
+'text/html; charset=ISO-8859-1'
+
+
+
+
+
+>>> import urllib.request as request
+
+>>> import urllib.error as error
+
+>>> try: #attempt an error case
+...     request.urlopen("https://www.python.ogr") #Wrong url passed to urlopen()
+...     except error.URLError as e:
+  File "<stdin>", line 3
+    except error.URLError as e:
+         ^
+SyntaxError: invalid syntax
+
+
+
+
+
+
+
+>>> import urllib.parse as urlparse
+
+>>> print(dir(urlparse))
+['DefragResult', 'DefragResultBytes', 'MAX_CACHE_SIZE', 'ParseResult', 'ParseResultBytes', 'Quoter', 'ResultBase', 'SplitResult', 'SplitResultBytes', '_ALWAYS_SAFE', '_ALWAYS_SAFE_BYTES', '_DefragResultBase', '_NetlocResultMixinBase', '_NetlocResultMixinBytes', '_NetlocResultMixinStr', '_ParseResultBase', '_ResultMixinBytes', '_ResultMixinStr', '_SplitResultBase', '__all__', '__builtins__', '__cached__', '__doc__', '__file__', '__loader__', '__name__', '__package__', '__spec__', '_asciire', '_checknetloc', '_coerce_args', '_decode_args', '_encode_result', '_hexdig', '_hextobyte', '_hostprog', '_implicit_encoding', '_implicit_errors', '_noop', '_parse_cache', '_portprog', '_safe_quoters', '_splitnetloc', '_splitparams', '_typeprog', 'clear_cache', 'collections', 'namedtuple', 'non_hierarchical', 'parse_qs', 'parse_qsl', 'quote', 'quote_from_bytes', 'quote_plus', 're', 'scheme_chars', 'splitattr', 'splithost', 'splitnport', 'splitpasswd', 'splitport', 'splitquery', 'splittag', 'splittype', 'splituser', 'splitvalue', 'sys', 'to_bytes', 'unquote', 'unquote_plus', 'unquote_to_bytes', 'unwrap', 'urldefrag', 'urlencode', 'urljoin', 'urlparse', 'urlsplit', 'urlunparse', 'urlunsplit', 'uses_fragment', 'uses_netloc', 'uses_params', 'uses_query', 'uses_relative']
+
+>>> amazonUrl = "https://amazon.com/s/ref=nb_sb_noss?url=search-alias%3Dstripbooks-intl-ship&field-keywords=Pearson+Books"
+
+>>> print(urlparse.urlsplit(amazonUrl)) #Split amazon url
+SplitResult(scheme='https', netloc='amazon.com', path='/s/ref=nb_sb_noss', query='url=search-alias%3Dstripbooks-intl-ship&field-keywords=Pearson+Books', fragment='')
+
+>>> print(urlparse.urlsplit(amazonUrl).scheme)
+https
+
+>>> print(urlparse.urlparse(amazonUrl))
+ParseResult(scheme='https', netloc='amazon.com', path='/s/ref=nb_sb_noss', params='', query='url=search-alias%3Dstripbooks-intl-ship&field-keywords=Pearson+Books', fragment='')
+
+>>> data = {"param1":"value1","param2":"value2"}
+
+>>> urlparse.urlencode(data)
+'param1=value1&param2=value2'
+
+>>> urlparse.parse_qs(urlparse.urlencode(data))
+{'param1': ['value1'], 'param2': ['value2']}
+
+>>> urlparse.urlencode(data).encode("utf8")
+b'param1=value1&param2=value2'
+
+>>> urlparse.urljoin("http://localhost:8080/~cache/","data file") #create url
+'http://localhost:8080/~cache/data file'
+
+>>> import urllib.robotparser as robot
+
+>>> par = robot.RobotFileParser()
+
+>>> par.set_url("https://www.samsclub.com/robots.txt")
+
+>>> par.read() #reading the url content
+
+>>> print(par)
+User-agent: *
+Allow: /ads.txt
+Allow: /sams/account/signin/createSession.jsp
+Disallow: /cgi-bin/
+Disallow: /sams/checkout/
+Disallow: /sams/account/
+Disallow: /sams/cart/
+Disallow: /sams/search/
+Disallow: /sams/eValues/clubInsiderOffers.jsp
+Disallow: /friend
+Disallow: /s/
+Disallow: /%2ASCDC%3D1%2A
+Allow: /sams/account/referal/
+
+>>> par.can_fetch("*", "https://www.samsclub.come/friend")
+False
+
