@@ -1,0 +1,17 @@
+TCP/IP Review
+Netcat
+Wireshark
+Crypto XDR
+Python Networking Libraries
+os, sys, scapy, pcapy, argparse, urllib, httplib
+socket
+
+Python Tools
+macchanger
+net scanner
+arpspoof
+packet sniffer
+
+Setup Environment
+
+
